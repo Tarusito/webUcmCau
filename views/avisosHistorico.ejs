@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/modalShowHide.js"></script>
+    <link rel="stylesheet" href="css/avisos.css">
+    <title>Avisos Histórico</title>
+</head>
+
+<body>
+    <%- include("header") %>
+
+    <div class="container">
+        <div class="row mt-4 row-cols-auto">
+            <div class="col">
+                <a href="/avisos">Mis avisos</a>
+            </div>
+            <div class="col">
+                |
+            </div>
+            <div class="col">
+                <a href="">Histórico de Avisos</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-sm mt-3">
+        <table class="table table-dark table-striped me-5">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Texto</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% avisos.forEach(function(aviso){ %>
+            <tr class="getText"
+             id="<%= aviso.id %>-<%= aviso.tipo %>-<%= aviso.fecha %>-<%= aviso.texto %>-<%= aviso.textoTecnico %>-<%= aviso.categoriaFuncion %>-<%= aviso.funcion %>">
+              <td scope="row"><%= aviso.fecha %></td>
+              <% if (aviso.texto.length < 200){ %>
+              <td><%= aviso.texto%></td>
+              <% } else { %>
+              <td><%= aviso.texto.substr(0,200)%>...</td>
+              <% } %>
+              <% if(aviso.tipo == "Sugerencia"){ %>
+                <td><img src="img/sugerencia.png" alt="sugerencia"></td>
+                <% } else if (aviso.tipo == "Incidencia"){%>
+                  <td><img src="img/incidencia.png" alt="incidencia"></td>
+                <% } else { %>
+                  <td><img src="img/felicitacion.png" alt="felicitacion"></td>
+                  <% } %>
+              <td><img src="img/eye.png" alt="ojoloco"data-bs-toggle="modal" data-bs-target="#plantillaModal" style="cursor: pointer;"></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+
+    <!-- Modal Plantilla -->
+    <div class="modal fade" id="plantillaModal" tabindex="-1" aria-labelledby="plantillaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="plantillaModalLabel">Aviso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <h4><%= user.nombre %></h4>
+                        </div>
+                        <div class="col-6" id="avisoTipoModal">
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-3" id="fechaModal">
+
+                    </div>
+                    <div class="row" id="comunicacionesModal">
+
+                    </div>
+                    <div class="row">
+                        <h6>Perfil: <%= user.perfilUniversitario %></h6>
+                    </div>
+                    <div class="row">
+                        <h6>Observaciones: </h6>
+                    </div>
+                    <div class="row border" id="textoModal">
+
+                    </div>
+
+                    <div class="row">
+                        <h6>Comentarios del técnico</h6>
+                    </div>
+
+                    <div class="row border" id="textoTecnicoModal">
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+
+</html>

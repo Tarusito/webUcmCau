@@ -1,0 +1,109 @@
+<header>
+    <div class="container-fluid sticky-top hide" id="cabecera">
+        <div class="row row-cols-auto justify-content-between py-2">
+            <div class="col">
+                <img src="img/logoUCM_130x147.png" alt="Logo_UCM">
+            </div>
+            <div class="col">
+                <div class="row row-cols-auto justify-content-center mt-3">
+                    <div class="col">
+                        <h2 class = "text-white">UCM - CAU</h2>
+                    </div>
+                </div>
+
+                <div class="row row-cols-auto justify-content-center">
+                    <div class="col">
+                        <h4 class = "text-white">Centro de atención al usuario</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex">
+                <div clas="col">
+                    <img src="/imagen" alt="Foto de usuario" width="100" height="100" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" style="cursor: pointer;">
+                </div>
+                <div class="col">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="border border-secondary border-2 px-5 py-2 mb-2 text-white"><%= user.nombre %></div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-auto justify-content-center">
+                            <div class="col">
+                                <a href="/logout" class="btn btn-dark">Desconectar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-5">
+                <div class = "row">
+                    <div class="col-10">
+                    <input type="text" class="form-control" name="busqueda" id="busqueda" placeholder="Buscar avisos..."
+                        aria-label="Username" />
+                    </div>
+                    <div class="col-2 form-check checkbox-lg pt-2">
+                        <input class="form-check-input" name = "busquedaUsuarios" type="checkbox" id = "busquedaUsuarios">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Usuarios
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Perfil</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row row-cols-auto justify-content-center">
+                        <div class="col">
+                            <img src="/imagen" alt="Foto del usuario" width="100" height="100">
+                        </div>
+
+                        <div class="col mt-3">
+                            <div class="row">
+                                <h2><%= user.nombre %></h2>
+                            </div>
+                            <div class="row">
+                                <h4>Fecha de creación: <%= user.fecha_creacion %> </h4>
+                                <h4>Perfil: <%= user.perfilUniversitario %></h4>
+                                <h4>Contraseña: <%= user.contrasenia %></h4>
+                                <h4>Nombre para mostrar: <%= user.nombre %></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <% if(user.tecnico){ %>
+                            <h5>Avisos gestionados: <%= user.nAvisos %></h5>
+                        <% } else {%>
+                            <h5>Avisos realizados: <%= user.nAvisos %></h5>
+                        <% } %>
+                        <h5>Incidencias: <%= user.nIncidencias %></h5>
+                        <h5>Sugerencias: <%= user.nSugerencias %></h5>
+                        <h5>Felicitaciones: <%= user.nFelicitacion %></h5>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
